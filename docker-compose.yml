@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql 
+    container_name: mysql 
+    ports:
+    - 3306:3306
+    env_file: .sql.env
+
+  app:
+    build: .
+    image: mysql-connection-tester
+    container_name: go
+    ports: 
+    - 8080:8080
+    env_file: .env
+    depends_on:
+    - db
